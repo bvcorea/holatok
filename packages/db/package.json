@@ -18,6 +18,10 @@
   "devDependencies": {
     "@repo/typescript-config": "*",
     "prisma": "^6",
+    "ts-node": "^10.9.2",
     "typescript": "5.9.2"
+  },
+  "prisma": {
+    "seed": "ts-node -P tsconfig.seed.json prisma/seed.ts"
   }
 }

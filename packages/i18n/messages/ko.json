@@ -1,6 +1,7 @@
 {
   "common": {
-    "appName": "홀라톡",
+    "appName": "홀라 톡",
+    "tagline": "당신의 K-Culture 포털",
     "loading": "로딩 중...",
     "error": "오류가 발생했습니다",
     "save": "저장",
@@ -9,26 +10,203 @@
     "edit": "편집",
     "back": "뒤로",
     "next": "다음",
-    "submit": "제출"
+    "submit": "제출",
+    "search": "검색",
+    "seeAll": "전체 보기",
+    "learnMore": "자세히 보기",
+    "comingSoon": "출시 예정"
   },
   "nav": {
     "home": "홈",
-    "about": "소개",
-    "contact": "문의",
+    "content": "콘텐츠",
+    "chat": "AI 채팅",
+    "travel": "여행",
+    "shop": "쇼핑",
+    "community": "커뮤니티",
     "login": "로그인",
     "logout": "로그아웃",
-    "profile": "프로필"
+    "register": "회원가입",
+    "profile": "내 프로필",
+    "orders": "주문 내역",
+    "bookings": "예약 내역"
   },
   "home": {
-    "title": "홀라톡에 오신 것을 환영합니다",
-    "description": "한국, 스페인, 브라질을 연결하는 글로벌 플랫폼",
-    "cta": "시작하기"
+    "hero": {
+      "title": "¡Hola! 환영합니다",
+      "subtitle": "라틴아메리카를 위한 K-Culture 플랫폼",
+      "description": "K-Pop, K-Drama, K-Beauty, K-Food 그리고 한국 여행을 스페인어로 즐기세요.",
+      "cta": "무료로 시작하기",
+      "ctaLogin": "로그인"
+    },
+    "categories": {
+      "title": "K-Culture 탐색",
+      "kpop": "K-Pop",
+      "kpopDesc": "한국 음악, 그룹 및 아티스트",
+      "kdrama": "K-Drama",
+      "kdramaDesc": "한국 드라마 및 영화",
+      "kbeauty": "K-Beauty",
+      "kbeautyDesc": "한국 스킨케어 및 화장품",
+      "kfood": "K-Food",
+      "kfoodDesc": "한국 음식 및 레시피",
+      "ktravel": "K-Travel",
+      "ktravelDesc": "한국 여행 및 체험"
+    },
+    "features": {
+      "title": "모든 것이 여기에",
+      "ai": "AI 채팅",
+      "aiDesc": "한국 캐릭터와 대화하세요",
+      "content": "독점 콘텐츠",
+      "contentDesc": "맞춤형 영상 및 추천",
+      "shop": "한국 쇼핑",
+      "shopDesc": "한국 상품을 직접 배송"
+    },
+    "countries": {
+      "title": "라틴아메리카 전체를 위해",
+      "brazil": "브라질",
+      "mexico": "멕시코",
+      "colombia": "콜롬비아",
+      "argentina": "아르헨티나",
+      "chile": "칠레",
+      "peru": "페루"
+    }
   },
   "auth": {
-    "login": "로그인",
-    "register": "회원가입",
-    "email": "이메일",
-    "password": "비밀번호",
-    "forgotPassword": "비밀번호를 잊으셨나요?"
+    "login": {
+      "title": "¡Hola! 환영합니다",
+      "subtitle": "로그인하세요",
+      "email": "이메일",
+      "emailPlaceholder": "your@email.com",
+      "password": "비밀번호",
+      "passwordPlaceholder": "최소 8자리",
+      "submit": "로그인",
+      "google": "Google로 계속하기",
+      "forgotPassword": "비밀번호를 잊으셨나요?",
+      "noAccount": "계정이 없으신가요?",
+      "createAccount": "무료 계정 만들기",
+      "or": "또는",
+      "errors": {
+        "invalidCredentials": "이메일 또는 비밀번호가 올바르지 않습니다",
+        "emailRequired": "이메일을 입력하세요",
+        "passwordRequired": "비밀번호를 입력하세요",
+        "serverError": "서버 오류가 발생했습니다. 다시 시도해 주세요"
+      }
+    },
+    "register": {
+      "title": "회원가입",
+      "subtitle": "K-Culture 커뮤니티에 참여하세요",
+      "name": "이름",
+      "namePlaceholder": "이름을 입력하세요",
+      "email": "이메일",
+      "emailPlaceholder": "your@email.com",
+      "password": "비밀번호",
+      "passwordPlaceholder": "최소 8자리",
+      "country": "국가",
+      "countryPlaceholder": "국가를 선택하세요",
+      "submit": "계정 만들기",
+      "google": "Google로 가입",
+      "hasAccount": "이미 계정이 있으신가요?",
+      "login": "로그인",
+      "terms": "가입 시 다음에 동의합니다:",
+      "termsLink": "이용약관",
+      "or": "또는",
+      "countries": {
+        "BR": "브라질 🇧🇷",
+        "MX": "멕시코 🇲🇽",
+        "CO": "콜롬비아 🇨🇴",
+        "AR": "아르헨티나 🇦🇷",
+        "CL": "칠레 🇨🇱",
+        "PE": "페루 🇵🇪"
+      },
+      "errors": {
+        "nameRequired": "이름을 입력하세요",
+        "nameMin": "최소 2자 이상 입력하세요",
+        "emailRequired": "이메일을 입력하세요",
+        "emailInvalid": "올바른 이메일 형식이 아닙니다",
+        "passwordRequired": "비밀번호를 입력하세요",
+        "passwordMin": "최소 8자리 이상 입력하세요",
+        "countryRequired": "국가를 선택하세요",
+        "emailExists": "이미 가입된 이메일입니다",
+        "serverError": "서버 오류가 발생했습니다. 다시 시도해 주세요"
+      }
+    }
+  },
+  "content": {
+    "kpop": "K-Pop",
+    "kdrama": "K-Drama",
+    "kbeauty": "K-Beauty",
+    "kfood": "K-Food",
+    "ktravel": "K-Travel",
+    "recommended": "추천 콘텐츠",
+    "trending": "인기 급상승",
+    "latest": "최신 영상",
+    "likes": "좋아요 {count}개",
+    "bookmarked": "저장됨",
+    "addToList": "목록에 추가"
+  },
+  "chat": {
+    "title": "K-Culture AI 채팅",
+    "subtitle": "좋아하는 한국 캐릭터를 선택하세요",
+    "newChat": "새 대화",
+    "personas": {
+      "OPPA": { "name": "오빠", "desc": "K-Pop 전문 한국 오빠" },
+      "UNNI": { "name": "언니", "desc": "K-Beauty와 K-Drama 전문 한국 언니" },
+      "SAEM": { "name": "선생님", "desc": "한국 문화와 한국어 기초 학습" },
+      "GUIDE": { "name": "여행 가이드", "desc": "한국 여행 및 명소 전문가" },
+      "CHEF": { "name": "쉐프", "desc": "한국 요리 및 레시피 전문가" }
+    },
+    "placeholder": "메시지를 입력하세요...",
+    "send": "전송"
+  },
+  "travel": {
+    "title": "한국 여행",
+    "packages": "여행 패키지",
+    "from": "~부터",
+    "days": "{n}일",
+    "nights": "{n}박",
+    "groupSize": "최대 {n}명",
+    "book": "지금 예약",
+    "bucketList": "버킷리스트",
+    "addToBucketList": "버킷리스트에 추가"
+  },
+  "commerce": {
+    "title": "K-Culture 쇼핑",
+    "price": {
+      "krw": "₩{amount}",
+      "usd": "US${amount}",
+      "brl": "R$ {amount}",
+      "mxn": "${amount} MXN",
+      "cop": "${amount} COP",
+      "ars": "${amount} ARS",
+      "clp": "${amount} CLP",
+      "pen": "S/ {amount}"
+    },
+    "addToCart": "장바구니 추가",
+    "buyNow": "바로 구매",
+    "outOfStock": "품절",
+    "payment": {
+      "title": "결제 수단",
+      "card": "신용/체크카드",
+      "pix": "PIX (브라질)",
+      "oxxo": "OXXO (멕시코)",
+      "mercadopago": "MercadoPago"
+    },
+    "order": {
+      "status": {
+        "PENDING": "대기 중",
+        "PAID": "결제 완료",
+        "PROCESSING": "처리 중",
+        "SHIPPED": "배송 중",
+        "DELIVERED": "배송 완료",
+        "CANCELLED": "취소됨",
+        "REFUNDED": "환불됨"
+      }
+    }
+  },
+  "community": {
+    "title": "커뮤니티",
+    "newPost": "새 게시글",
+    "review": "리뷰",
+    "rating": "{n}/5점",
+    "writeReview": "리뷰 작성"
   }
 }

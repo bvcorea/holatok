@@ -1,6 +1,7 @@
 {
   "common": {
-    "appName": "HolaTok",
+    "appName": "Hola Talk",
+    "tagline": "Tu portal de K-Culture",
     "loading": "Cargando...",
     "error": "Ha ocurrido un error",
     "save": "Guardar",
@@ -9,26 +10,218 @@
     "edit": "Editar",
     "back": "Volver",
     "next": "Siguiente",
-    "submit": "Enviar"
+    "submit": "Enviar",
+    "search": "Buscar",
+    "seeAll": "Ver todo",
+    "learnMore": "Saber más",
+    "comingSoon": "Próximamente"
   },
   "nav": {
     "home": "Inicio",
-    "about": "Acerca de",
-    "contact": "Contacto",
+    "content": "Contenido",
+    "chat": "Chat IA",
+    "travel": "Viajes",
+    "shop": "Tienda",
+    "community": "Comunidad",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
-    "profile": "Perfil"
+    "register": "Crear cuenta",
+    "profile": "Mi perfil",
+    "orders": "Mis pedidos",
+    "bookings": "Mis reservas"
   },
   "home": {
-    "title": "Bienvenido a HolaTok",
-    "description": "La plataforma global que conecta Corea, España y Brasil",
-    "cta": "Comenzar"
+    "hero": {
+      "title": "¡Hola! Bienvenido a",
+      "subtitle": "Tu portal de K-Culture en español",
+      "description": "Descubre K-Pop, K-Drama, K-Beauty, K-Food y viajes a Corea — todo en tu idioma.",
+      "cta": "Comenzar gratis",
+      "ctaLogin": "Ya tengo cuenta"
+    },
+    "categories": {
+      "title": "Explora K-Culture",
+      "kpop": "K-Pop",
+      "kpopDesc": "Música, grupos y artistas coreanos",
+      "kdrama": "K-Drama",
+      "kdramaDesc": "Series y películas coreanas",
+      "kbeauty": "K-Beauty",
+      "kbeautyDesc": "Skincare y cosméticos coreanos",
+      "kfood": "K-Food",
+      "kfoodDesc": "Gastronomía y recetas coreanas",
+      "ktravel": "K-Travel",
+      "ktravelDesc": "Viajes y experiencias en Corea"
+    },
+    "features": {
+      "title": "Todo lo que necesitas",
+      "ai": "Chat con IA",
+      "aiDesc": "Habla con nuestros personajes coreanos",
+      "content": "Contenido exclusivo",
+      "contentDesc": "Videos y recomendaciones personalizadas",
+      "shop": "Compras de Corea",
+      "shopDesc": "Productos enviados directo a tu país"
+    },
+    "countries": {
+      "title": "Para toda Latinoamérica",
+      "brazil": "Brasil",
+      "mexico": "México",
+      "colombia": "Colombia",
+      "argentina": "Argentina",
+      "chile": "Chile",
+      "peru": "Perú"
+    }
   },
   "auth": {
-    "login": "Iniciar sesión",
-    "register": "Registrarse",
-    "email": "Correo electrónico",
-    "password": "Contraseña",
-    "forgotPassword": "¿Olvidaste tu contraseña?"
+    "login": {
+      "title": "¡Hola! Bienvenido",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "submit": "Iniciar sesión",
+      "google": "Continuar con Google",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "noAccount": "¿No tienes cuenta?",
+      "createAccount": "Crear cuenta gratis",
+      "or": "o",
+      "errors": {
+        "invalidCredentials": "Correo o contraseña incorrectos",
+        "emailRequired": "El correo es obligatorio",
+        "passwordRequired": "La contraseña es obligatoria",
+        "serverError": "Error del servidor, intenta de nuevo"
+      }
+    },
+    "register": {
+      "title": "Crear cuenta",
+      "subtitle": "Únete a la comunidad K-Culture",
+      "name": "Nombre completo",
+      "namePlaceholder": "Tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tu@correo.com",
+      "password": "Contraseña",
+      "passwordPlaceholder": "Mínimo 8 caracteres",
+      "country": "País",
+      "countryPlaceholder": "Selecciona tu país",
+      "submit": "Crear cuenta",
+      "google": "Registrarse con Google",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "login": "Iniciar sesión",
+      "terms": "Al registrarte aceptas nuestros",
+      "termsLink": "Términos y condiciones",
+      "or": "o",
+      "countries": {
+        "BR": "Brasil 🇧🇷",
+        "MX": "México 🇲🇽",
+        "CO": "Colombia 🇨🇴",
+        "AR": "Argentina 🇦🇷",
+        "CL": "Chile 🇨🇱",
+        "PE": "Perú 🇵🇪"
+      },
+      "errors": {
+        "nameRequired": "El nombre es obligatorio",
+        "nameMin": "Mínimo 2 caracteres",
+        "emailRequired": "El correo es obligatorio",
+        "emailInvalid": "Correo inválido",
+        "passwordRequired": "La contraseña es obligatoria",
+        "passwordMin": "Mínimo 8 caracteres",
+        "countryRequired": "Selecciona tu país",
+        "emailExists": "Este correo ya está registrado",
+        "serverError": "Error del servidor, intenta de nuevo"
+      }
+    }
+  },
+  "content": {
+    "kpop": "K-Pop",
+    "kdrama": "K-Drama",
+    "kbeauty": "K-Beauty",
+    "kfood": "K-Food",
+    "ktravel": "K-Travel",
+    "recommended": "Recomendado para ti",
+    "trending": "Tendencias",
+    "latest": "Últimos videos",
+    "likes": "{count} me gusta",
+    "bookmarked": "Guardado",
+    "addToList": "Añadir a mi lista"
+  },
+  "chat": {
+    "title": "Chat con IA K-Culture",
+    "subtitle": "Elige tu personaje coreano favorito",
+    "newChat": "Nueva conversación",
+    "personas": {
+      "OPPA": {
+        "name": "Oppa",
+        "desc": "Tu hermano mayor coreano, experto en K-Pop"
+      },
+      "UNNI": {
+        "name": "Unni",
+        "desc": "Tu hermana mayor coreana, experta en K-Beauty y K-Drama"
+      },
+      "SAEM": {
+        "name": "Saem (Profesor)",
+        "desc": "Aprende cultura y coreano básico"
+      },
+      "GUIDE": {
+        "name": "Guía de Viaje",
+        "desc": "Experto en viajes y lugares en Corea"
+      },
+      "CHEF": {
+        "name": "Chef Coreano",
+        "desc": "Recetas y gastronomía coreana"
+      }
+    },
+    "placeholder": "Escribe tu mensaje...",
+    "send": "Enviar"
+  },
+  "travel": {
+    "title": "Viajes a Corea",
+    "packages": "Paquetes turísticos",
+    "from": "Desde",
+    "days": "{n} días",
+    "nights": "{n} noches",
+    "groupSize": "Máx. {n} personas",
+    "book": "Reservar ahora",
+    "bucketList": "Mi lista de deseos",
+    "addToBucketList": "Añadir a mi lista"
+  },
+  "commerce": {
+    "title": "Tienda K-Culture",
+    "price": {
+      "krw": "₩{amount}",
+      "usd": "US${amount}",
+      "brl": "R$ {amount}",
+      "mxn": "${amount} MXN",
+      "cop": "${amount} COP",
+      "ars": "${amount} ARS",
+      "clp": "${amount} CLP",
+      "pen": "S/ {amount}"
+    },
+    "addToCart": "Añadir al carrito",
+    "buyNow": "Comprar ahora",
+    "outOfStock": "Sin stock",
+    "payment": {
+      "title": "Método de pago",
+      "card": "Tarjeta de crédito/débito",
+      "pix": "PIX (Brasil)",
+      "oxxo": "OXXO (México)",
+      "mercadopago": "MercadoPago"
+    },
+    "order": {
+      "status": {
+        "PENDING": "Pendiente",
+        "PAID": "Pagado",
+        "PROCESSING": "En proceso",
+        "SHIPPED": "Enviado",
+        "DELIVERED": "Entregado",
+        "CANCELLED": "Cancelado",
+        "REFUNDED": "Reembolsado"
+      }
+    }
+  },
+  "community": {
+    "title": "Comunidad",
+    "newPost": "Nueva publicación",
+    "review": "Reseña",
+    "rating": "{n}/5 estrellas",
+    "writeReview": "Escribir reseña"
   }
 }

@@ -30,7 +30,7 @@ export function RegisterForm() {
 
   useEffect(() => {
     if (state.success) {
-      router.push(`/${locale}/auth/login?registered=1`);
+      router.push(`/${locale}/auth/login?registered=1&next=onboarding`);
     }
   }, [state.success, locale, router]);
 

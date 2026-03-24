@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Shadcn base */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -26,42 +27,65 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  /* Brand tokens */
+  /* ── Holatok Brand ── */
   --color-coral: var(--coral);
   --color-coral-light: var(--coral-light);
   --color-coral-dark: var(--coral-dark);
   --color-seoul-blue: var(--seoul-blue);
   --color-seoul-blue-light: var(--seoul-blue-light);
   --color-seoul-blue-dark: var(--seoul-blue-dark);
+  --color-navy: var(--navy);
+  --color-navy-light: var(--navy-light);
+  /* ── K-Culture ── */
+  --color-kpop: var(--kpop);
+  --color-kpop-light: var(--kpop-light);
+  --color-kdrama: var(--kdrama);
+  --color-kdrama-light: var(--kdrama-light);
+  --color-kbeauty: var(--kbeauty);
+  --color-kbeauty-light: var(--kbeauty-light);
+  --color-kfood: var(--kfood);
+  --color-kfood-light: var(--kfood-light);
 }
 
 :root {
   --radius: 0.625rem;
+  /* Shadcn light */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary: #ff6b6b;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --accent: #4a90d9;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  /* Holatok Brand */
+  --ring: #ff6b6b;
+  /* Brand */
   --coral: #ff6b6b;
   --coral-light: #ff8e8e;
   --coral-dark: #e54e4e;
   --seoul-blue: #4a90d9;
   --seoul-blue-light: #6ba8e8;
   --seoul-blue-dark: #2e71be;
+  --navy: #1a1a2e;
+  --navy-light: #2d2d4e;
+  /* K-Culture */
+  --kpop: #ff69b4;
+  --kpop-light: #ffb3d9;
+  --kdrama: #4db6ac;
+  --kdrama-light: #80cbc4;
+  --kbeauty: #b39ddb;
+  --kbeauty-light: #ce93d8;
+  --kfood: #ffb74d;
+  --kfood-light: #ffcc80;
 }
 
 .dark {
@@ -71,18 +95,18 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: #ff6b6b;
+  --primary-foreground: #ffffff;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --accent: #4a90d9;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: #ff6b6b;
 }
 
 * {
@@ -100,6 +124,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 a {

@@ -7,79 +7,543 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ──────────────────────────────────────────────
-// User & Auth
-// ──────────────────────────────────────────────
+// ══════════════════════════════════════════════════════
+// DOMAIN 1 — AUTH  (6 models)
+// ══════════════════════════════════════════════════════
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String?
-  avatarUrl String?
-  locale    Locale   @default(ko)
-  role      Role     @default(USER)
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  passwordHash  String?
+
+  role            Role     @default(USER)
+  language        Language @default(es)
+  country         Country  @default(MX)
+  preferredLocale Locale   @default(es)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  profile   Profile?
-  posts     Post[]
+  // NextAuth relations
+  accounts Account[]
+  sessions Session[]
+
+  // App relations
+  profile       Profile?
+  interests     UserInterest[]
+  contentLikes  ContentLike[]
+  bookmarks     Bookmark[]
+  bucketList    BucketListItem[]
+  chatSessions  ChatSession[]
+  bookings      Booking[]
+  orders        Order[]
+  posts         Post[]
+  reviews       Review[]
 
   @@map("users")
 }
 
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
 model Profile {
-  id        String  @id @default(cuid())
-  bio       String?
-  location  String?
-  website   String?
-  userId    String  @unique
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String  @id @default(cuid())
+  userId      String  @unique
+  bio         String?
+  avatarUrl   String?
+  location    String?
+  website     String?
+  socialLinks Json?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("profiles")
 }
 
-// ──────────────────────────────────────────────
-// Content
-// ──────────────────────────────────────────────
+model UserInterest {
+  id       String    @id @default(cuid())
+  userId   String
+  category KCategory
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, category])
+  @@map("user_interests")
+}
+
+// ══════════════════════════════════════════════════════
+// DOMAIN 2 — CONTENT  (4 models)
+// ══════════════════════════════════════════════════════
+
+model Content {
+  id           String        @id @default(cuid())
+  sourceType   ContentSource
+  sourceId     String
+  title        String
+  titleEs      String?
+  description  String?
+  thumbnailUrl String?
+  videoUrl     String?
+  locale       Locale        @default(es)
+  category     KCategory
+  viewCount    Int           @default(0)
+  published    Boolean       @default(false)
+  publishedAt  DateTime?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  likes     ContentLike[]
+  bookmarks Bookmark[]
+
+  @@unique([sourceType, sourceId])
+  @@index([category, locale])
+  @@map("contents")
+}
+
+model ContentLike {
+  id        String   @id @default(cuid())
+  userId    String
+  contentId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentId])
+  @@map("content_likes")
+}
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  contentId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content Content @relation(fields: [contentId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentId])
+  @@map("bookmarks")
+}
+
+model BucketListItem {
+  id          String    @id @default(cuid())
+  userId      String
+  title       String
+  description String?
+  category    KCategory
+  placeId     String?
+  completed   Boolean   @default(false)
+  completedAt DateTime?
+  imageUrl    String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  place Place? @relation(fields: [placeId], references: [id])
+
+  @@index([userId])
+  @@map("bucket_list_items")
+}
+
+// ══════════════════════════════════════════════════════
+// DOMAIN 3 — CHAT  (2 models)
+// ══════════════════════════════════════════════════════
+
+model ChatSession {
+  id        String   @id @default(cuid())
+  userId    String
+  persona   Persona
+  title     String?
+  locale    Locale   @default(es)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+
+  @@index([userId])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String      @id @default(cuid())
+  sessionId String
+  role      MessageRole
+  content   String
+  tokens    Int?
+  createdAt DateTime    @default(now())
+
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@map("chat_messages")
+}
+
+// ══════════════════════════════════════════════════════
+// DOMAIN 4 — TRAVEL  (4 models)
+// ══════════════════════════════════════════════════════
+
+model Place {
+  id            String        @id @default(cuid())
+  name          String
+  nameEs        String?
+  description   String?
+  category      PlaceCategory
+  city          String
+  address       String?
+  lat           Float?
+  lng           Float?
+  googlePlaceId String?       @unique
+  imageUrl      String?
+  rating        Float?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  bucketListItems  BucketListItem[]
+  packageDays      TravelPackageDay[]
+
+  @@index([city, category])
+  @@map("places")
+}
+
+model TravelPackage {
+  id            String  @id @default(cuid())
+  title         String
+  titleEs       String
+  description   String
+  descriptionEs String
+  country       Country
+  daysCount     Int
+  nights        Int
+  priceKRW      Int
+  priceUSD      Decimal @db.Decimal(10, 2)
+  thumbnailUrl  String?
+  imageUrls     String[]
+  maxGroupSize  Int     @default(10)
+  published     Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  days     TravelPackageDay[]
+  bookings Booking[]
+
+  @@index([country, published])
+  @@map("travel_packages")
+}
+
+model TravelPackageDay {
+  id          String  @id @default(cuid())
+  packageId   String
+  dayNumber   Int
+  title       String?
+  description String?
+
+  package TravelPackage @relation(fields: [packageId], references: [id], onDelete: Cascade)
+  places  Place[]
+
+  @@unique([packageId, dayNumber])
+  @@map("travel_package_days")
+}
+
+model Booking {
+  id           String        @id @default(cuid())
+  userId       String
+  packageId    String
+  status       BookingStatus @default(PENDING)
+  participants Int           @default(1)
+  totalKRW     Int
+  localCurrency String
+  localAmount  Decimal       @db.Decimal(10, 2)
+  exchangeRate Decimal       @db.Decimal(10, 4)
+  travelDate   DateTime
+  notes        String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  user    User          @relation(fields: [userId], references: [id])
+  package TravelPackage @relation(fields: [packageId], references: [id])
+  payment Payment?
+
+  @@index([userId])
+  @@map("bookings")
+}
+
+// ══════════════════════════════════════════════════════
+// DOMAIN 5 — COMMERCE  (4 models)
+// ══════════════════════════════════════════════════════
+
+model Product {
+  id            String          @id @default(cuid())
+  name          String
+  nameEs        String
+  description   String
+  descriptionEs String
+  category      ProductCategory
+  priceKRW      Int
+  priceUSD      Decimal         @db.Decimal(10, 2)
+  stock         Int             @default(0)
+  imageUrls     String[]
+  published     Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  orderItems OrderItem[]
+
+  @@index([category, published])
+  @@map("products")
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  userId        String
+  status        OrderStatus @default(PENDING)
+  country       Country
+  localCurrency String
+  localAmount   Decimal     @db.Decimal(10, 2)
+  usdAmount     Decimal     @db.Decimal(10, 2)
+  exchangeRate  Decimal     @db.Decimal(10, 4)
+  shippingAddress Json
+  notes         String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  user    User        @relation(fields: [userId], references: [id])
+  items   OrderItem[]
+  payment Payment?
+
+  @@index([userId])
+  @@map("orders")
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  priceKRW  Int
+  priceUSD  Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@map("order_items")
+}
+
+model Payment {
+  id         String          @id @default(cuid())
+  provider   PaymentProvider
+  status     PaymentStatus   @default(PENDING)
+  externalId String?
+  amount     Decimal         @db.Decimal(10, 2)
+  currency   String
+  orderId    String?         @unique
+  bookingId  String?         @unique
+  metadata   Json?
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  order   Order?   @relation(fields: [orderId], references: [id])
+  booking Booking? @relation(fields: [bookingId], references: [id])
+
+  @@map("payments")
+}
+
+// ══════════════════════════════════════════════════════
+// DOMAIN 6 — COMMUNITY  (2 models)
+// ══════════════════════════════════════════════════════
 
 model Post {
-  id          String      @id @default(cuid())
-  title       String
-  slug        String      @unique
-  content     String?
-  published   Boolean     @default(false)
-  locale      Locale      @default(ko)
-  authorId    String
-  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  tags        Tag[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id        String    @id @default(cuid())
+  authorId  String
+  title     String
+  content   String
+  locale    Locale    @default(es)
+  category  KCategory?
+  imageUrls String[]
+  published Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  @@index([authorId])
-  @@index([slug])
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId, locale])
   @@map("posts")
 }
 
-model Tag {
-  id    String @id @default(cuid())
-  name  String @unique
-  posts Post[]
+model Review {
+  id         String       @id @default(cuid())
+  authorId   String
+  targetType ReviewTarget
+  targetId   String       // polymorphic: Product.id / TravelPackage.id / Place.id / Post.id
+  rating     Int
+  content    String?
+  imageUrls  String[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
 
-  @@map("tags")
+  // Polymorphic: use targetType + targetId for queries, no FK enforced
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([targetType, targetId])
+  @@map("reviews")
 }
 
-// ──────────────────────────────────────────────
-// Enums
-// ──────────────────────────────────────────────
-
-enum Locale {
-  ko
-  es
-  pt_BR @map("pt-BR")
-}
+// ══════════════════════════════════════════════════════
+// ENUMS
+// ══════════════════════════════════════════════════════
 
 enum Role {
   USER
+  PREMIUM
   MODERATOR
   ADMIN
+}
+
+enum Locale {
+  es
+  pt_BR @map("pt-BR")
+  ko
+}
+
+enum Country {
+  BR
+  MX
+  CO
+  AR
+  CL
+  PE
+  KR
+  OTHER
+}
+
+enum Language {
+  es
+  pt
+  ko
+}
+
+enum KCategory {
+  KPOP
+  KDRAMA
+  KBEAUTY
+  KFOOD
+  KTRAVEL
+}
+
+enum Persona {
+  OPPA
+  UNNI
+  SAEM
+  GUIDE
+  CHEF
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+
+enum ContentSource {
+  YOUTUBE
+  TIKTOK
+}
+
+enum PlaceCategory {
+  RESTAURANT
+  CAFE
+  LANDMARK
+  SHOPPING
+  ENTERTAINMENT
+  NATURE
+  ACCOMMODATION
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum ProductCategory {
+  KPOP_MERCHANDISE
+  KBEAUTY
+  FOOD
+  CLOTHING
+  ACCESSORIES
+  ELECTRONICS
+  OTHER
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  STRIPE
+  STRIPE_PIX
+  STRIPE_OXXO
+  MERCADOPAGO
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum ReviewTarget {
+  PRODUCT
+  PACKAGE
+  PLACE
+  POST
 }

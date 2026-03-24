@@ -11,17 +11,20 @@ import { Label } from "@/components/ui/label";
 
 const initialState: LoginState = {};
 
-export function LoginForm() {
+export function LoginForm({ next }: { next?: string }) {
   const locale = useLocale();
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(loginUser, initialState);
 
   useEffect(() => {
     if (state.success) {
-      router.push(`/${locale}`);
+      const dest = next === "onboarding"
+        ? `/${locale}/onboarding`
+        : `/${locale}`;
+      router.push(dest);
       router.refresh();
     }
-  }, [state.success, locale, router]);
+  }, [state.success, locale, router, next]);
 
   return (
     <form action={formAction} className="space-y-4">

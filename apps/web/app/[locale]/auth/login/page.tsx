@@ -16,8 +16,14 @@ export const metadata: Metadata = {
   title: "Iniciar sesión",
 };
 
-export default async function LoginPage() {
+interface PageProps {
+  searchParams: Promise<{ registered?: string; next?: string }>;
+}
+
+export default async function LoginPage({ searchParams }: PageProps) {
   const locale = await getLocale();
+  const params = await searchParams;
+  const next = params.next;
 
   return (
     <main className="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-4 py-12">
@@ -25,7 +31,9 @@ export default async function LoginPage() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">Bienvenido de vuelta</CardTitle>
           <CardDescription>
-            Inicia sesión en tu cuenta de Hola Talk
+            {params.registered === "1"
+              ? "¡Cuenta creada! Inicia sesión para continuar"
+              : "Inicia sesión en tu cuenta de Hola Talk"}
           </CardDescription>
         </CardHeader>
 
@@ -43,7 +51,7 @@ export default async function LoginPage() {
             </div>
           </div>
 
-          <LoginForm />
+          <LoginForm next={next} />
         </CardContent>
 
         <CardFooter className="flex justify-center">

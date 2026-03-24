@@ -1,0 +1,34 @@
+{
+  "common": {
+    "appName": "홀라톡",
+    "loading": "로딩 중...",
+    "error": "오류가 발생했습니다",
+    "save": "저장",
+    "cancel": "취소",
+    "delete": "삭제",
+    "edit": "편집",
+    "back": "뒤로",
+    "next": "다음",
+    "submit": "제출"
+  },
+  "nav": {
+    "home": "홈",
+    "about": "소개",
+    "contact": "문의",
+    "login": "로그인",
+    "logout": "로그아웃",
+    "profile": "프로필"
+  },
+  "home": {
+    "title": "홀라톡에 오신 것을 환영합니다",
+    "description": "한국, 스페인, 브라질을 연결하는 글로벌 플랫폼",
+    "cta": "시작하기"
+  },
+  "auth": {
+    "login": "로그인",
+    "register": "회원가입",
+    "email": "이메일",
+    "password": "비밀번호",
+    "forgotPassword": "비밀번호를 잊으셨나요?"
+  }
+}

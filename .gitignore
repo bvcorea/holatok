@@ -36,3 +36,9 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# Prisma
+packages/db/node_modules/.prisma
+
+# Docker
+docker-compose.override.yml

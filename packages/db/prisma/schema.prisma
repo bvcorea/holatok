@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ──────────────────────────────────────────────
+// User & Auth
+// ──────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  avatarUrl String?
+  locale    Locale   @default(ko)
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  profile   Profile?
+  posts     Post[]
+
+  @@map("users")
+}
+
+model Profile {
+  id        String  @id @default(cuid())
+  bio       String?
+  location  String?
+  website   String?
+  userId    String  @unique
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+// ──────────────────────────────────────────────
+// Content
+// ──────────────────────────────────────────────
+
+model Post {
+  id          String      @id @default(cuid())
+  title       String
+  slug        String      @unique
+  content     String?
+  published   Boolean     @default(false)
+  locale      Locale      @default(ko)
+  authorId    String
+  author      User        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  tags        Tag[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([authorId])
+  @@index([slug])
+  @@map("posts")
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  posts Post[]
+
+  @@map("tags")
+}
+
+// ──────────────────────────────────────────────
+// Enums
+// ──────────────────────────────────────────────
+
+enum Locale {
+  ko
+  es
+  pt_BR @map("pt-BR")
+}
+
+enum Role {
+  USER
+  MODERATOR
+  ADMIN
+}

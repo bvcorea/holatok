@@ -1,0 +1,34 @@
+{
+  "common": {
+    "appName": "HolaTok",
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "submit": "Enviar"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "profile": "Perfil"
+  },
+  "home": {
+    "title": "Bienvenido a HolaTok",
+    "description": "La plataforma global que conecta Corea, España y Brasil",
+    "cta": "Comenzar"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?"
+  }
+}

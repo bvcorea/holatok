@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { CartDrawer } from "@/components/commerce/CartDrawer";
 
 export function Navbar() {
   const { data: session } = useSession();
@@ -54,7 +55,8 @@ export function Navbar() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <CartDrawer />
           {session ? (
             <>
               <Link href={`/${locale}/perfil`}>

@@ -193,7 +193,7 @@ model BucketListItem {
 model ChatSession {
   id        String   @id @default(cuid())
   userId    String
-  persona   Persona
+  persona   Persona  @default(OPPA)
   title     String?
   locale    Locale   @default(es)
   createdAt DateTime @default(now())

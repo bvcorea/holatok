@@ -245,6 +245,90 @@ async function main() {
   }
   console.log(`✅ Seeded ${places.length} places`);
 
+  // ─── Products ─────────────────────────────────────────────────
+  const products = [
+    {
+      name: "BTS - MOTS: ON Weverse Album",
+      nameEs: "BTS - Álbum Coleccionable MOTS: ON",
+      description: "Official BTS Weverse Album",
+      descriptionEs: "Álbum oficial de BTS con tarjeta photocard incluida",
+      category: "KPOP_MERCHANDISE" as const,
+      priceKRW: 25000,
+      priceUSD: 19.99,
+      stock: 50,
+      imageUrls: [],
+      published: true,
+    },
+    {
+      name: "COSRX Advanced Snail 96 Mucin Power Essence",
+      nameEs: "COSRX Esencia de Baba de Caracol 96%",
+      description: "COSRX Snail Mucin Essence 100ml",
+      descriptionEs: "Esencia facial hidratante con 96% de mucina de caracol, 100ml",
+      category: "KBEAUTY" as const,
+      priceKRW: 18000,
+      priceUSD: 13.90,
+      stock: 100,
+      imageUrls: [],
+      published: true,
+    },
+    {
+      name: "Laneige Lip Sleeping Mask Berry",
+      nameEs: "Laneige Mascarilla de Labios Noche - Fresa",
+      description: "Laneige Lip Sleeping Mask Berry 20g",
+      descriptionEs: "Mascarilla hidratante de labios para usar de noche, sabor fresa, 20g",
+      category: "KBEAUTY" as const,
+      priceKRW: 22000,
+      priceUSD: 16.50,
+      stock: 80,
+      imageUrls: [],
+      published: true,
+    },
+    {
+      name: "Ottogi Cheese Ramyeon",
+      nameEs: "Ramyeon de Queso Ottogi",
+      description: "Ottogi Cheese Ramyeon x 5 packs",
+      descriptionEs: "Pack de 5 ramen instantáneo sabor queso, marca Ottogi",
+      category: "FOOD" as const,
+      priceKRW: 6500,
+      priceUSD: 4.99,
+      stock: 200,
+      imageUrls: [],
+      published: true,
+    },
+    {
+      name: "Hanbok T-Shirt (Unisex)",
+      nameEs: "Camiseta Inspirada en Hanbok (Unisex)",
+      description: "Modern Hanbok-inspired T-Shirt",
+      descriptionEs: "Camiseta unisex con diseño moderno inspirado en el Hanbok tradicional",
+      category: "CLOTHING" as const,
+      priceKRW: 35000,
+      priceUSD: 26.99,
+      stock: 30,
+      imageUrls: [],
+      published: true,
+    },
+    {
+      name: "K-Pop Lightstick Bag Charm",
+      nameEs: "Llavero Lightstick K-Pop",
+      description: "Mini lightstick bag charm keychain",
+      descriptionEs: "Llavero mini lightstick de K-Pop, varios colores disponibles",
+      category: "ACCESSORIES" as const,
+      priceKRW: 8000,
+      priceUSD: 6.50,
+      stock: 150,
+      imageUrls: [],
+      published: true,
+    },
+  ];
+
+  for (const product of products) {
+    const existing = await prisma.product.findFirst({ where: { name: product.name } });
+    if (!existing) {
+      await prisma.product.create({ data: product });
+    }
+  }
+  console.log(`✅ Seeded ${products.length} products`);
+
   console.log("🎉 Seed complete!");
 }
 
